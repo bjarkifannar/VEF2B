@@ -1,0 +1,29 @@
+1. ECMAScript er kjarni sem t.d. Javascript byggir á.
+
+2. Ef að breytur þurfa að vera sama gagnatýpa þarf að nota ===
+
+3.	a) var result = 5 * "5"; gefur 25
+	b) var result = 5 + "5"; gefur 55 þar sem það bætir streng við tölu
+
+4. Það eru 3 global breytur
+
+5. A gefur skilaboðin "hi", en B gefur villu um að breytan message sé ekki til. "use strict" gerir breytuna local breytu.
+
+6. null er þegar það er ekkert í breytu en undefined þýðir að breytan er ekki skilgreind/ekki til
+
+7.
+
+var names = ['George', 'Ringo', 'Paul', 'John'];
+var j = names.length;
+
+for (var i = 0; i < j; i++) {
+	doSomethingWith(names[i]);
+}
+
+Breytan j tekin út úr for lykkjunni þannig að það er auðveldara að lesa kóðann
+
+8. foreach er bara fyrir fylki (array). for in er notuð til að fara í gegnum "properties" objecta. for of er ný leið til að fara í gegn um collections
+
+9. NaN stendur fyrir Not a Number og console.log(NaN == NaN); er false því NaN er ekki tala.
+
+10. Það birtist "user" því að null er ekki neitt og er því false en "user" er true.
