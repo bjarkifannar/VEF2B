@@ -1,0 +1,175 @@
+1.	Hér er dæmi um “function decleration” og kall á fallið. Afhverju virkar eftirfarandi kóði í
+	JavaScript, útskýrðu?
+
+	x();
+	function x() {
+		console.log('x');
+	}
+
+	/* Svar */
+	JavaScript þýðandinn fer yfir kóðann áður hann er keyrður og gerir breytingar (t.d. færir öll föll upp)
+	þannig að kóðinn verður
+
+	function x() {
+		console.log('x');
+	}
+	x();
+
+	áður en hann er keyrður.
+
+
+2.	Í hvaða röð er kóðinn keyrður í raun eftir að þýðandinn (e. interpreter) er búinn að fá hann til
+	sín? Hvað birtir alert(), afhverju?
+
+	function foo(){
+		function bar() {
+			return 3;
+		}
+
+		return bar();
+
+		function bar() {
+			return 8;
+		}
+	}
+
+	alert(foo());
+
+	/* Svar */
+	Seinna bar() er sett fyrir ofan return bar().
+
+	alert() kallar í foo() sem kallar í seinna bar() og birtir 8.
+
+
+3.	Í hvaða röð er kóðinn keyrður í raun eftir að þýðandinn (e. interpreter) er búinn að fá hann til
+	sín? Hvað birtir alert(), afhverju?
+	
+	function foo(){
+		var bar = function() {
+			return 3;
+		};
+
+		return bar();
+		
+		var bar = function() {
+			return 8;
+		};
+	}
+	
+	alert(foo());
+
+	/* Svar */
+	Seinna bar er ekki sett fyrir ofan return bar().
+
+	alert() birtir 3 því að sinna bar() er ennþá fyrir neðan return.
+
+
+4.	Hægt er búa til fall m.a. með 'function expressions' eða 'function declarations'. Hvort ætti maður
+	að nota, afhverju?
+
+	/* Svar */
+	Í flestum tilfellum er hægt að nota bæði og fer eftir hvort manni finnst betra að nota.
+
+
+5.	Hvað gerist þegar ég gleymi að skilgreina breytu með var? Útskýrðu hvað gerist
+	
+	age = "30";
+	console.log(age);
+
+	/* Svar */
+	JavaScript þýðandinn bætir við var age; fyrir ofan þar sem breytan age er notuð fyrst.
+
+	Breyttur kóði:
+
+	var age;
+	age = "30";
+	console.log(age);
+
+
+6.	Útskýrðu hvað eftirfarandi kóði gerir, hvað gera svigarnir?
+	
+	(function() {
+		alert('Hello World');
+	})();
+
+	/* Svar */
+	Svigarnir (function...) búa til local scope fyrir þetta function og svigarnir fyrir aftan keyra
+	þetta function þegar þýðandinn kemur þangað.
+
+
+7.	Afhverju virkar eftirfarandi kóðabútur með óskilgreindu breytunni, útskýrðu?
+	
+	var result = (true || someUndeclaredVariable);
+	alert(result); // true
+
+	/* Svar */
+	JavaScript tekur undefined sem false þannig að breytan result verður true.
+
+
+8.	Útskýrðu hvers vegna úttakið er “hello world”
+	
+	var originalFunction = function () {
+		alert('hello world');
+	}
+	var copiedFunction = originalFunction; // Hvað gerir þessi setning?
+	var originalFunction = function () {
+		alert('goodbye world');
+	}
+	copiedFunction();
+
+	/* Svar */
+	Línan "var copiedFunction = originalFunction;" tekur function-ið originalFunction og setur það í breytuna
+	copiedFunction þannig að þegar originalFunction er breytt, breytist copiedFunction ekki.
+
+
+9.	Útskýrðu úttak:
+
+	function power(base, exponent) {
+		if (exponent === undefined)
+			exponent = 2;
+		
+		var result = 1;
+			
+		for (var count = 0; count < exponent; count++)
+			result *= base;
+
+		return result;
+	}
+
+	console.log(power(4)); // Afhverju virkar þetta?
+	console.log(power(4,3,2)); // Hvað verður um gildið 2
+
+	/* Svar */
+	console.log(power(4)) kallar í fallið power og gefur því 4 sem base, en exponent er undefined.
+	console.log(power(4,3,2)) kallar í fallið power og gefur því 4 sem base, 3 sem exponent og 2 gerir ekki neitt.
+
+
+10.	Hvað er call stack og hvað er heap?
+	
+	/* Svar */
+	Call stack er partur í vinnsluminninu sem geymir hvaða skipanir er verið að framkvæma.
+	Heap er partur í vinnsluminninu sem geymir hluti eins og breytur, föll og objecta.
+
+
+11.	Hvað er callback, komdu með lítið dæmi og útskýrðu.
+
+	/* Svar */
+	Callback er fall sem getur gert eitthvað á meðan annar kóði er keyrður.
+
+	/* Dæmi */
+	Fallið a() þarf að ná í gögn fyrir fallið b().
+	Fallið a() byrjar að keyra í bakgrunninum og JavaScript heldur áfram að keyra aðrar skipanir.
+	Þegar fallið a() er búið með sýna vinnslu bíður svarið þangað til að Call Stack sé tómt og skilar síðan niðurstöðunni til b().
+	Þá getur b() byrjað að vinna með þær upplýsingar sem a() gaf b().
+
+
+12.	Hvað þýða eftirfarandi hugtök í JavaScript?
+	
+	a. Non blocking
+	b. Single thread
+	c. asynchronous
+
+	/* Svar */
+	a. Keyrsla á einu falli í JavaScript blockar ekki annað fall.
+	b. JavaScript getur bara gert einn hlut í einu.
+	c. JavaScript getur haldið keyrslunni áfram á meðan annað fall er að vinna í bakgrunninum.
